@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>Catalog</h1>
+		</div>
+	</div>
+	<div class="row">
+		<aside class="col-md-3">
+			
+			<h2>Categories</h2>
+
+			<ul>
+			{% if categories %}
+			{% for category in categories %}
+				<li>
+					<a href="{{url_for('viewCategory',cat_name=category.name)}}">{{category.name}}</a>
+				</li>
+			{% endfor %}
+			{% endif %}
+				<li><a href="{{url_for('newCategory')}}">Add New Category</a></li>
+			</ul>
+			
+		</aside>
+		<div class="col-md-9">
+			{% if latestItems %}
+			<h2>Latest Items</h2>
+
+			<ul>
+			{% for item in latestItems %}
+				<li>
+					<a href="{{url_for('viewItem',cat_name=item.category.name,item_name=item.name)}}">{{item.name}} <strong>({{item.category.name}})</strong></a>
+				</li>
+			{% endfor %}
+			</ul>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

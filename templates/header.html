@@ -1,0 +1,30 @@
+<div class="row top-menu">
+	<div class="col-md-6">
+		<a href="{{url_for('showCategories')}}">
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home
+		</a>
+	</div>
+	<div class="col-md-6 text-right">
+		<p>
+		{% if user %}
+		welcome, {{user.name}},<a href="/gdisconnect"><strong>Logout</strong></a>
+		{% else %}
+		<a href="/login" class="btn">Login</a>
+		{% endif %}
+		</p>
+	</div>
+</div>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-info">
+	<ul>
+		{% for msg in messages %}
+		<li>{{msg}}</li>
+		{% endfor %}
+	</ul>
+</div>
+
+{% endif %}
+{% endwith %}

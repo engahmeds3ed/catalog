@@ -1,0 +1,37 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>Category: {{category.name}}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{% if items %}
+			<h2>Items</h2>
+
+			<ul>
+			{% for item in items %}
+				<li>
+					<a href="{{url_for('viewItem',cat_name=item.category.name,item_name=item.name)}}">{{item.name}}</a>
+					{% if isAdmin %}
+					<br>
+					<a href="{{url_for('editItem',cat_name=item.category.name,item_name=item.name)}}">Edit</a> | 
+					<a href="{{url_for('deleteItem',cat_name=item.category.name,item_name=item.name)}}">Delete</a>
+					{% endif %}
+				</li>
+			{% endfor %}
+			</ul>
+			{% endif %}
+			
+			{% if isAdmin %}
+			<hr>
+			<a href="{{url_for('newItem',cat_name=category.name)}}">Add new item</a> | <a href="{{url_for('editCategory',cat_name=category.name)}}">Edit this category</a> | <a href="{{url_for('deleteCategory',cat_name=category.name)}}">Delete this category</a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
